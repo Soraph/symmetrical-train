@@ -117,4 +117,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # css files
-src/**/*.css
+*.css
+
