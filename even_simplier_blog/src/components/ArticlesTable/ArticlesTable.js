@@ -40,6 +40,10 @@ const ArticlesTable = (props) => {
 
 };
 
+ArticlesTable.defaultProps = {
+  rows: []
+}
+
 ArticlesTable.propTypes = {
   rows: PropTypes.array,
 }
