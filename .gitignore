@@ -101,7 +101,7 @@ ENV/
 .mypy_cache/
 
 # dependencies
-/node_modules
+node_modules
 
 # testing
 /coverage
