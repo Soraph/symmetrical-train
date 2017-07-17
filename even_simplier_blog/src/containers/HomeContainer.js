@@ -3,7 +3,9 @@ import {
   getError,
   getArticles,
   getLoadingStatus,
-  getArticlesAsync
+  getSavingStatus,
+  getArticlesAsync,
+  handleArticle
 } from '../modules/articles';
 
 import Home from '../components/Home';
@@ -11,12 +13,14 @@ import Home from '../components/Home';
 
 const mapDispatchToProps = {
   getError: () => getError(),
-  getArticlesAsync: () => getArticlesAsync()
+  getArticlesAsync: () => getArticlesAsync(),
+  handleArticle: (data) => handleArticle(data),
 };
 
 const mapStateToProps = (state) => {
   return {
     isLoading: getLoadingStatus(state),
+    isSaving: getSavingStatus(state),
     articles: getArticles(state)
   };
 };
