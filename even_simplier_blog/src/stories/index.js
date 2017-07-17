@@ -17,10 +17,19 @@ const handleArticle = (state) => {
   });
 }
 
+const articleModified = () => {
+  action('Article modified')
+  return true;
+}
+
 storiesOf('ArticleForm', module)
 .add('with no data supplied', () => {
+  const params = {
+    handleArticle,
+    articleModified
+  }
   return (
-    <ArticleForm handleArticle={handleArticle} />
+    <ArticleForm {...params} />
   );
 })
 .add('with aid supplied', () => {
@@ -28,7 +37,8 @@ storiesOf('ArticleForm', module)
     aid: 'lorem-ipsum-123-456',
     title: 'Title 1',
     content: 'Content 1',
-    handleArticle
+    handleArticle,
+    articleModified
   }
 
   return (
