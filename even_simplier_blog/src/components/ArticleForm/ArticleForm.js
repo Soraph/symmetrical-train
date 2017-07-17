@@ -14,6 +14,7 @@ class ArticleForm extends Component {
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.formSubmit = this.formSubmit.bind(this);
   }
 
   quickChangeState(who, what) {
@@ -22,14 +23,14 @@ class ArticleForm extends Component {
     });
   }
 
-  handleInputChange(event) {
-      this.validateForm();
+  handleInputChange(e) {
+    this.validateForm();
 
-      const target = event.target;
-      const value = target.value;
-      const name = target.name;
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
 
-      this.quickChangeState(name, value);
+    this.quickChangeState(name, value);
   }
 
   validateForm() {
@@ -37,27 +38,25 @@ class ArticleForm extends Component {
     this.quickChangeState('invalidContent', this.state.content.trim() ? false : true);
   }
 
+  formSubmit(e)  {
+    e.preventDefault();
+    this.validateForm();
+
+    if (!this.state.invalidTitle && !this.state.invalidContent) {
+      this.props.handleArticle(this.state)
+      .then((response) => {
+        this.setState({
+          aid: this.state.aid,
+          title: '',
+          content: '',
+        });
+      })
+    }
+  }
+
   render () {
     return (
-      <form className="ArticleForm" onSubmit={
-        (e) => {
-          e.preventDefault();
-          if (this.state.title.trim() && this.state.content.trim()) {
-            this.validateForm();
-
-            this.props.handleArticle(this.state)
-            .then((response) => {
-              this.setState({
-                aid: this.state.aid,
-                title: '',
-                content: '',
-              });
-            })
-          } else {
-            this.validateForm();
-          }
-        }
-      }>
+      <form className="ArticleForm" onSubmit={this.formSubmit}>
         <input type="hidden" name="aid" value={this.state.aid} />
         <div>
           <input
@@ -87,6 +86,12 @@ class ArticleForm extends Component {
       </form>
     )
   }
+}
+
+ArticleForm.defaultProps = {
+  aid: '',
+  title: '',
+  content: ''
 }
 
 export default ArticleForm;
