@@ -79,13 +79,47 @@ storiesOf('ArticlesTable', module)
 storiesOf('Home', module)
 .add('with no articles', () => (
   <Home />
-));
+))
+.add('with articles', () => {
+  let articles = [
+    {
+      aid: '123321312',
+      title: 'Title 1',
+      content: 'Content 1'
+    },
+    {
+      aid: '23223131',
+      title: 'Title 2',
+      content: 'Content 2'
+    }
+  ];
+
+  const handleArticleV2 = (state) => {
+    return new Promise((s, f) => {
+      action('Handle article V2')(state);
+      articles[articles.indexOf(
+        articles.find(el => {
+          return el.aid === state.aid
+        })
+      )] = {
+        aid: state.aid,
+        title: state.title,
+        content: state.content
+      }
+      s();
+    });
+  }
+
+  return (
+    <Home articles={articles} handleArticle={handleArticleV2} />
+  )
+});
 
 
 storiesOf('App', module)
 .addDecorator(StoryRouter({'/about': linkTo('App', 'about')}))
 .add('home', () => (
   <App>
-    <Home counter={10} increment={action('incremented')}/>
+    <Home />
   </App>
 ));

@@ -14,7 +14,7 @@ const ArticlesTable = (props) => {
   if (props.rows.length) {
     rowsData = props.rows.map(el => {
       return (
-        <tr key={el.aid}>
+        <tr key={el.aid} onClick={() => props.modifyArticle(el)}>
           <td>{el.title}</td>
           <td>{el.content}</td>
         </tr>
@@ -46,6 +46,7 @@ ArticlesTable.defaultProps = {
 
 ArticlesTable.propTypes = {
   rows: PropTypes.array,
+  modifyArticle: PropTypes.func
 }
 
 export default ArticlesTable;

@@ -17,6 +17,16 @@ class ArticleForm extends Component {
     this.formSubmit = this.formSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+      if (nextProps.aid !== this.props.aid) {
+        this.setState({
+          aid: nextProps.aid,
+          title: nextProps.title,
+          content: nextProps.content
+        })
+      }
+  }
+
   quickChangeState(who, what) {
     this.setState({
       [who]: what
@@ -45,11 +55,7 @@ class ArticleForm extends Component {
     if (!this.state.invalidTitle && !this.state.invalidContent) {
       this.props.handleArticle(this.state)
       .then((response) => {
-        this.setState({
-          aid: this.state.aid,
-          title: '',
-          content: '',
-        });
+        this.props.articleModified();
       })
     }
   }
