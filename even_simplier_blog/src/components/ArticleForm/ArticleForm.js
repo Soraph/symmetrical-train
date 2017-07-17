@@ -34,8 +34,6 @@ class ArticleForm extends Component {
   }
 
   handleInputChange(e) {
-    this.validateForm();
-
     const target = e.target;
     const value = target.value;
     const name = target.name;
@@ -50,14 +48,21 @@ class ArticleForm extends Component {
 
   formSubmit(e)  {
     e.preventDefault();
-    this.validateForm();
 
-    if (!this.state.invalidTitle && !this.state.invalidContent) {
-      this.props.handleArticle(this.state)
+    if (this.state.title.trim() && this.state.content.trim()) {
+      const articleData = {
+        aid: this.state.aid,
+        title: this.state.title,
+        content: this.state.content
+      }
+
+      this.props.handleArticle(articleData)
       .then((response) => {
         this.props.articleModified();
       })
     }
+
+    this.validateForm();
   }
 
   render () {
