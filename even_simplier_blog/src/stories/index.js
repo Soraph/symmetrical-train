@@ -77,8 +77,8 @@ storiesOf('ArticlesTable', module)
 });
 
 storiesOf('Home', module)
-.add('with counter', () => (
-  <Home counter={10} increment={action('incremented')}/>
+.add('with no articles', () => (
+  <Home />
 ));
 
 
