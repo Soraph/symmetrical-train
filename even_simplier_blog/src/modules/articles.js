@@ -1,6 +1,8 @@
 // ------------------------------------
 // Constants
 
+const SERIVCE_API = 'http://127.0.0.1:5000';
+
 const IS_LOADING_ARTICLES = 'LOADING_ARTICLES';
 const STORE_ARTICLES = 'STORE_ARTICLES';
 const HAS_ERROR = 'HAS_ERROR';
@@ -33,7 +35,7 @@ function hasError(status = false, message = "") {
 
 export function getArticlesAsync() {
     return dispatch => {
-        fetch("http://127.0.0.1:5000/articles/")
+        fetch(`${SERIVCE_API}/articles/`)
         .then(response => {
             if (response.ok)
                 return response.json();
