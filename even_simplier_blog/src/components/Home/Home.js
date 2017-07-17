@@ -29,13 +29,8 @@ class Home extends Component {
   }
 
   modifyArticle(element) {
-    let opened = true;
-
-    if (this.state.aid === element.aid)
-      opened = false;
-
     this.setState({
-      modifyArticle: opened,
+      modifyArticle: true,
       aid: element.aid,
       title: element.title,
       content: element.content
