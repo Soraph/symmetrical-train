@@ -32,7 +32,7 @@ storiesOf('ArticleForm', module)
     <ArticleForm {...params} />
   );
 })
-.add('with aid supplied', () => {
+.add('with article supplied', () => {
   const params = {
     aid: 'lorem-ipsum-123-456',
     title: 'Title 1',
