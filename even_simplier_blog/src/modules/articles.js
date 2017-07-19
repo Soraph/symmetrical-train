@@ -63,6 +63,13 @@ function updateArticle({aid, title, content}) {
   }
 }
 
+function deleteArticle(aid) {
+  return {
+    type: DELETE_ARTICLE,
+    payload: aid
+  }
+}
+
 export function getArticlesAsync() {
   return dispatch => {
     fetch(`${SERVICE_API}/articles/`)
@@ -123,6 +130,36 @@ export function handleArticle(data) {
     };
   }
 
+  export function deleteArticleAsync(data) {
+    if (window.confirm("Are you sure you want to delete the element?")) {
+      return dispatch => {
+        fetch(`${SERVICE_API}/articles/${data.aid}`, {
+          method: 'DELETE',
+          body: JSON.stringify(data.aid),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            }
+          })
+        .then(response => {
+          dispatch(isSavingArticle(true));
+          if (response.ok)
+            return response.json();
+
+          throw new Error('Could not contact the server.');
+        })
+        .then(article => {
+          dispatch(isSavingArticle(false));
+          dispatch(deleteArticle(data.aid));
+        })
+        .catch(error => {
+          dispatch(hasError(true, error.message));
+          dispatch(isSavingArticle(false));
+        });
+      };
+    }
+  }
+
   // ------------------------------------
   // Selectors
 
@@ -180,6 +217,12 @@ export function handleArticle(data) {
           ...state,
           articles: newArticles,
         };
+      case DELETE_ARTICLE:
+        newArticles = state.articles.filter((e) => e.aid !== action.payload)
+        return {
+          ...state,
+          articles: newArticles
+        }
       case HAS_ERROR:
         return {
           ...state,
