@@ -74,6 +74,8 @@ export function getArticlesAsync() {
   return dispatch => {
     fetch(`${SERVICE_API}/articles/`)
     .then(response => {
+      dispatch(isLoadingArticles(true));
+      
       if (response.ok)
         return response.json();
 
