@@ -58,11 +58,16 @@ class Home extends Component {
       )
     }
 
+    const articlesTableParams = {
+      rows: this.props.articles,
+      modifyArticle: this.modifyArticle,
+      deleteArticle: this.props.deleteArticleAsync
+    }
 
     return (
       <div className="Home">
         <h2>Articles in the blog</h2>
-        <ArticlesTable rows={this.props.articles} modifyArticle={this.modifyArticle} />
+        <ArticlesTable {...articlesTableParams} />
         {form}
       </div>
     );
