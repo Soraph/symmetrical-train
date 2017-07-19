@@ -45,7 +45,7 @@ function hasError(status = false, message = "") {
   };
 }
 
-function createArticle(aid, title, content) {
+function createArticle({aid, title, content}) {
   return {
     type: CREATE_ARTICLE,
     payload: {
@@ -92,7 +92,7 @@ export function getArticlesAsync() {
 
 export function handleArticle(data) {
   let dispatchFunction = createArticle;
-  let extraUrlInfo = '';
+  let extraUrlInfo = '/';
   let method = 'POST';
 
   if (data.aid.length) {
@@ -143,14 +143,12 @@ export function handleArticle(data) {
           })
         .then(response => {
           dispatch(isSavingArticle(true));
-          if (response.ok)
-            return response.json();
+          if (response.ok) {
+            dispatch(isSavingArticle(false));
+            dispatch(deleteArticle(data.aid));
+          }
 
           throw new Error('Could not contact the server.');
-        })
-        .then(article => {
-          dispatch(isSavingArticle(false));
-          dispatch(deleteArticle(data.aid));
         })
         .catch(error => {
           dispatch(hasError(true, error.message));
@@ -222,7 +220,7 @@ export function handleArticle(data) {
         return {
           ...state,
           articles: newArticles
-        }
+        };
       case HAS_ERROR:
         return {
           ...state,
