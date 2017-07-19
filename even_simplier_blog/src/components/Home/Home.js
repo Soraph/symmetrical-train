@@ -60,6 +60,8 @@ class Home extends Component {
 
     const articlesTableParams = {
       rows: this.props.articles,
+      isModifyingArticle: this.state.modifyArticle,
+      createArticle: this.modifyArticle,
       modifyArticle: this.modifyArticle,
       deleteArticle: this.props.deleteArticleAsync
     }
