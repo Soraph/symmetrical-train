@@ -61,8 +61,14 @@ storiesOf('ArticlesTable', module)
     }
   ];
 
+  const params= {
+    rows,
+    modifyArticle: action('modifyArticle trigger'),
+    deleteArticle: action('deleteArticle trigger')
+  }
+
   return (
-    <ArticlesTable rows={rows} />
+    <ArticlesTable {...params} />
   );
 })
 .add('with 1 article', () => {
@@ -74,15 +80,27 @@ storiesOf('ArticlesTable', module)
     }
   ];
 
+  const params= {
+    rows,
+    modifyArticle: action('modifyArticle trigger'),
+    deleteArticle: action('deleteArticle trigger')
+  }
+
   return (
-    <ArticlesTable rows={rows} />
+    <ArticlesTable {...params} />
   );
 })
 .add('with no articles', () => {
   const rows = [];
 
+  const params= {
+    rows,
+    modifyArticle: action('modifyArticle trigger'),
+    deleteArticle: action('deleteArticle trigger')
+  }
+
   return (
-    <ArticlesTable rows={rows} />
+    <ArticlesTable {...params} />
   )
 });
 
