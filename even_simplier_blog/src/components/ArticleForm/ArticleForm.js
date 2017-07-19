@@ -61,8 +61,6 @@ class ArticleForm extends Component {
         this.props.articleModified();
       })
     }
-
-    this.validateForm();
   }
 
   render () {
