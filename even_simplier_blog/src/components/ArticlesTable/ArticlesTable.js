@@ -3,6 +3,12 @@ import './ArticlesTable.css'
 import PropTypes from 'prop-types';
 
 const ArticlesTable = (props) => {
+  const emptyArticle = {
+    aid: '',
+    title: '',
+    content: ''
+  }
+
   let rowsData = (
     <tr>
       <td colSpan={3} className="empty">
@@ -21,7 +27,7 @@ const ArticlesTable = (props) => {
             <button
               type="button"
               onClick={() => props.modifyArticle(el)}>
-                EDIT1
+                EDIT
               </button>
             <button
               type="button"
@@ -32,6 +38,18 @@ const ArticlesTable = (props) => {
         </tr>
       );}
     );
+  }
+
+  let newArticleButton = (
+    <button
+      type="button"
+      onClick={() => props.createArticle(emptyArticle)}>
+        Add new article
+    </button>
+  );
+
+  if (props.isModifyingArticle) {
+    newArticleButton = null;
   }
 
   return (
@@ -48,11 +66,7 @@ const ArticlesTable = (props) => {
           {rowsData}
         </tbody>
       </table>
-      <button
-        type="button"
-        onClick={() => props.createArticle()}>
-          Add new article
-        </button>
+      {newArticleButton}
     </div>
   )
 
