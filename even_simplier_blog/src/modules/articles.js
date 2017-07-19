@@ -1,7 +1,7 @@
 // ------------------------------------
 // Constants
 
-const SERIVCE_API = 'http://127.0.0.1:5000';
+const SERVICE_API = 'http://127.0.0.1:5000';
 
 const IS_LOADING_ARTICLES = 'LOADING_ARTICLES';
 const STORE_ARTICLES = 'STORE_ARTICLES';
@@ -10,6 +10,7 @@ const HAS_ERROR = 'HAS_ERROR';
 const IS_SAVING_ARTICLE = 'IS_SAVING_ARTICLE';
 const CREATE_ARTICLE = 'CREATE_ARTICLE';
 const UPDATE_ARTICLE = 'UPDATE_ARTICLE';
+const DELETE_ARTICLE = 'DELETE_ARTICLE';
 
 // ------------------------------------
 // Action creators
@@ -64,7 +65,7 @@ function updateArticle({aid, title, content}) {
 
 export function getArticlesAsync() {
   return dispatch => {
-    fetch(`${SERIVCE_API}/articles/`)
+    fetch(`${SERVICE_API}/articles/`)
     .then(response => {
       if (response.ok)
         return response.json();
@@ -96,7 +97,7 @@ export function handleArticle(data) {
   delete data.aid;
 
   return dispatch => {
-    return fetch(`${SERIVCE_API}/articles${extraUrlInfo}`, {
+    return fetch(`${SERVICE_API}/articles${extraUrlInfo}`, {
       method: method,
       body: JSON.stringify(data),
       headers: {
@@ -150,10 +151,10 @@ export function handleArticle(data) {
           isLoading: action.payload
         };
       case IS_SAVING_ARTICLE:
-      return {
-        ...state,
-        isSaving: action.payload
-      };
+        return {
+          ...state,
+          isSaving: action.payload
+        };
       case STORE_ARTICLES:
         return {
           ...state,
