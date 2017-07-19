@@ -48,6 +48,11 @@ const ArticlesTable = (props) => {
           {rowsData}
         </tbody>
       </table>
+      <button
+        type="button"
+        onClick={() => props.createArticle()}>
+          Add new article
+        </button>
     </div>
   )
 

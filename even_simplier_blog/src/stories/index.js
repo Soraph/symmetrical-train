@@ -64,7 +64,8 @@ storiesOf('ArticlesTable', module)
   const params= {
     rows,
     modifyArticle: action('modifyArticle trigger'),
-    deleteArticle: action('deleteArticle trigger')
+    deleteArticle: action('deleteArticle trigger'),
+    createArticle: action('createArticle trigger')
   }
 
   return (
@@ -83,7 +84,8 @@ storiesOf('ArticlesTable', module)
   const params= {
     rows,
     modifyArticle: action('modifyArticle trigger'),
-    deleteArticle: action('deleteArticle trigger')
+    deleteArticle: action('deleteArticle trigger'),
+    createArticle: action('createArticle trigger')
   }
 
   return (
@@ -96,7 +98,8 @@ storiesOf('ArticlesTable', module)
   const params= {
     rows,
     modifyArticle: action('modifyArticle trigger'),
-    deleteArticle: action('deleteArticle trigger')
+    deleteArticle: action('deleteArticle trigger'),
+    createArticle: action('createArticle trigger')
   }
 
   return (
