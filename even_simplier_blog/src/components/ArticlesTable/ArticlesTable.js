@@ -27,12 +27,12 @@ const ArticlesTable = (props) => {
             <button
               type="button"
               onClick={() => props.modifyArticle(el)}>
-                EDIT
+                Edit
               </button>
             <button
               type="button"
               onClick={() => props.deleteArticle(el)}>
-                DELETE
+                Delete
               </button>
           </td>
         </tr>
