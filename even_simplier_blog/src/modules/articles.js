@@ -72,10 +72,10 @@ function deleteArticle(aid) {
 
 export function getArticlesAsync() {
   return dispatch => {
-    fetch(`${SERVICE_API}/articles/`)
+    return fetch(`${SERVICE_API}/articles/`)
     .then(response => {
       dispatch(isLoadingArticles(true));
-      
+
       if (response.ok)
         return response.json();
 
@@ -234,3 +234,17 @@ export function handleArticle(data) {
         return state;
     }
   }
+
+  // ------------------------------------
+  // Testing variables
+
+  export const testing = {
+    service_api: SERVICE_API,
+    storeArticles,
+    createArticle,
+    updateArticle,
+    deleteArticle,
+    hasError,
+    isLoadingArticles,
+    isSavingArticle,
+  };
