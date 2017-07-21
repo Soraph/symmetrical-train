@@ -59,3 +59,21 @@ test('fetch articles with success', done => {
       done();
     });
 });
+
+test('fetch articles with error', done => {
+  fetchMock.get(`${testing.service_api}/articles/`, {status: 500});
+
+  const store = mockStore();
+  const expectedActions = [
+    testing.isLoadingArticles(true),
+    testing.hasError(true, "Could not fetch the articles"),
+    testing.isLoadingArticles(false),
+  ];
+
+  return store.dispatch(getArticlesAsync())
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions).toEqual(expectedActions);
+      done();
+    });
+});
